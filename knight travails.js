@@ -52,25 +52,31 @@ function printPath(finalMove) {
         return path;
     })();
 
-    console.log(`==> You made it in ${path.length} moves! Here's your path:`);
-    path.forEach(move => {
-        console.log(move);
-    });
+    if (!path.length) {
+        console.log("same move");
+    } else {
+        console.log(
+            `==> You made it in ${path.length} moves! Here's your path:`
+        );
+        path.forEach(move => {
+            console.log(move);
+        });
+    }
 }
+
 export function knightMoves(originalMove, movingMove) {
     const startingMove = new Move(originalMove);
     let queue = [startingMove];
-
+    let currentMove;
     while (true) {
-        const currentMove = queue.shift();
+        currentMove = queue.shift();
         queue = queue.concat(currentMove.moves);
         if (
             currentMove.move[0] == movingMove[0] &&
             currentMove.move[1] == movingMove[1]
         ) {
             printPath(currentMove);
-            break;
+            return;
         }
     }
 }
-// knightMoves([3, 3], [3, 4]);
