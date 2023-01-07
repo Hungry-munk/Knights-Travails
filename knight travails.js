@@ -1,7 +1,7 @@
 class Move {
-    constructor(pos, prePos = null) {
-        this.pos = pos;
-        this.prePos = prePos;
+    constructor(move, preMove = null) {
+        this.move = move;
+        this.preMove = preMove;
     }
 
     get moves() {
@@ -21,30 +21,57 @@ class Move {
                 // calculating valid positions
                 .filter(
                     knightMove =>
-                        this.pos[0] + knightMove[0] >= 0 &&
-                        this.pos[0] + knightMove[0] <= 7 &&
-                        this.pos[1] + knightMove[1] >= 0 &&
-                        this.pos[1] + knightMove[1] <= 7
+                        this.move[0] + knightMove[0] >= 0 &&
+                        this.move[0] + knightMove[0] <= 7 &&
+                        this.move[1] + knightMove[1] >= 0 &&
+                        this.move[1] + knightMove[1] <= 7
                 )
                 // adding valid positions to current position and making them instances of a new move
                 .map(
                     knightMove =>
                         new Move(
                             [
-                                this.pos[0] + knightMove[0],
-                                this.pos[1] + knightMove[1],
+                                this.move[0] + knightMove[0],
+                                this.move[1] + knightMove[1],
                             ],
-                            this.pos
+                            this
                         )
                 )
         );
     }
 }
 
-export function knightMoves(currentPos, movingPos) {
-    const startingPos = new Move(currentPos);
+function printPath(finalMove) {
+    const path = (() => {
+        let path = [];
+        let currentMove = finalMove;
+        while (currentMove) {
+            path.push(currentMove.move);
+            currentMove = currentMove.preMove;
+        }
+        return path;
+    })();
 
-    const queue = [startingPos];
+    console.log(`==> You made it in ${path.length} moves! Here's your path:`);
+    path.forEach(move => {
+        console.log(move);
+    });
+}
 
-    console.log(startingPos.moves);
+export function knightMoves(originalMove, movingMove) {
+    const startingMove = new Move(originalMove);
+    let queue = [startingMove];
+
+    while (queue.length) {
+        const currentMove = queue.shift();
+        queue = queue.concat(currentMove.moves);
+        if (currentMove.move == movingMove) {
+            printPath(currentMove);
+            break;
+        }
+    }
+}
+
+export function logHi() {
+    console.log("hi");
 }
