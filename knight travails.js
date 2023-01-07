@@ -30,8 +30,11 @@ class Move {
                 .map(
                     knightMove =>
                         new Move(
-                            this.pos[0] + knightMove[0],
-                            this.pos[1] + knightMove[1]
+                            [
+                                this.pos[0] + knightMove[0],
+                                this.pos[1] + knightMove[1],
+                            ],
+                            this.pos
                         )
                 )
         );
