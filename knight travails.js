@@ -45,7 +45,7 @@ function printPath(finalMove) {
     const path = (() => {
         let path = [];
         let currentMove = finalMove;
-        while (currentMove) {
+        while (currentMove.preMove) {
             path.push(currentMove.move);
             currentMove = currentMove.preMove;
         }
@@ -57,21 +57,20 @@ function printPath(finalMove) {
         console.log(move);
     });
 }
-
 export function knightMoves(originalMove, movingMove) {
     const startingMove = new Move(originalMove);
     let queue = [startingMove];
 
-    while (queue.length) {
+    while (true) {
         const currentMove = queue.shift();
         queue = queue.concat(currentMove.moves);
-        if (currentMove.move == movingMove) {
+        if (
+            currentMove.move[0] == movingMove[0] &&
+            currentMove.move[1] == movingMove[1]
+        ) {
             printPath(currentMove);
             break;
         }
     }
 }
-
-export function logHi() {
-    console.log("hi");
-}
+// knightMoves([3, 3], [3, 4]);
