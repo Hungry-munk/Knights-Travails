@@ -1,0 +1,20 @@
+{
+    "name": "knights-travails",
+    "version": "1.0.0",
+    "description": "A solution to a \"knight travails\" problem -- find the shortest path a knight can take to move between two positions on a chessboard.",
+    "main": "knight travails.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hungry-munk/Knights-Travails.git"
+    },
+    "author": "Arsam Abbaszadeh",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Hungry-munk/Knights-Travails/issues"
+    },
+    "homepage": "https://github.com/Hungry-munk/Knights-Travails#readme"
+}
